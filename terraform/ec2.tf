@@ -54,7 +54,7 @@ resource "aws_instance" "jenkins" {
   ami           = data.aws_ami.ubuntu3.id
   instance_type = "t2.micro"
   key_name      = "assigment-key-pair"
-  vpc_security_group_ids = [aws_security_group.private-ssh.id]
+  vpc_security_group_ids = [aws_security_group.private-ssh.id, aws_security_group.public.id]
   subnet_id = module.vpc.private_subnets[0]
  tags = {
     Name = "Jenkins"
@@ -83,7 +83,7 @@ resource "aws_instance" "App" {
   ami           = data.aws_ami.ubuntu1.id
   instance_type = "t2.micro"
   key_name      = "assigment-key-pair"
-  vpc_security_group_ids = [aws_security_group.public.id]
+  vpc_security_group_ids = [aws_security_group.public.id, aws_security_group.private-ssh.id]
   subnet_id = module.vpc.private_subnets[1]
  tags = {
     Name = "AppServer"
