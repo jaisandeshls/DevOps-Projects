@@ -4,7 +4,7 @@ name = "Bastion-system-sg"
 vpc_id = module.vpc.vpc_id
 ingress {
     cidr_blocks = [
-      var.myipaddress
+      "0.0.0.0/0"
     ]
     from_port = 22
     to_port = 22
