@@ -24,7 +24,7 @@ module "alb" {
         },
         {
           target_id = aws_instance.App.id
-          port = 8080
+          port = 80
         }
       ]
     }
