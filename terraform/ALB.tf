@@ -17,10 +17,14 @@ module "alb" {
       backend_protocol = "HTTP"
       backend_port     = 80
       target_type      = "instance"
-      targets = [
+      targets = [        
         {
-          target_id = aws_lb_target_group.jenkins-App.id
+          target_id = aws_instance.jenkins.id
           port = 80
+        },
+        {
+          target_id = aws_instance.App.id
+          port = 8080
         }
       ]
     }
