@@ -1,6 +1,6 @@
 # security group for Bastion system
 resource "aws_security_group" "bastion-ssh" {
-name = "Bastion-system"
+name = "Bastion-system-sg"
 vpc_id = module.vpc.vpc_id
 ingress {
     cidr_blocks = [
