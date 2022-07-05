@@ -1,0 +1,30 @@
+node('agent1'){
+
+    stage('Git clone'){
+
+        checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/jaisandeshls/DevOps-projects.git']]])        
+    }
+
+    stage('Docker Image Build'){
+
+        dir("/home/ubuntu/workspace/App-Deployment/Node-js-app-resource") {
+            
+            sh 'sudo docker build -t nodejs-app .'
+            
+        }
+    }
+
+    stage('Push Image to ECR'){
+
+       sh ''' aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 994734655866.dkr.ecr.us-east-1.amazonaws.com
+        sudo docker tag nodejs-app 994734655866.dkr.ecr.us-east-1.amazonaws.com/assignment-app:latest
+        sudo docker push 994734655866.dkr.ecr.us-east-1.amazonaws.com/assignment-app:latest 
+        '''
+
+    }
+
+    stage('Post Actions'){
+        cleanWs()
+    }
+
+}

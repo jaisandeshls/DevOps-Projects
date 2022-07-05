@@ -1,0 +1,15 @@
+
+node('agent1'){
+    stage('Deploy App'){
+        sh ''' ssh  -tt -o StrictHostKeyChecking=no -i assigment-key-pair.pem ubuntu@10.0.2.238 << 'EOF'
+        hostname
+        echo '---------------------------------------- Pre-Deploy-steps-----------------------------------'
+        sudo docker rm -f $(sudo docker ps -qa)
+        sudo docker rmi -f $(sudo docker images -q)
+        echo '----------------------------------------- Pre-Deploy-steps-Completed------------------------------------'
+        aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 994734655866.dkr.ecr.us-east-1.amazonaws.com
+        sudo docker run -d -p 80:8081 --rm --name my-app 994734655866.dkr.ecr.us-east-1.amazonaws.com/assignment-app:latest 
+        exit 0
+        EOF'''
+    }
+}
