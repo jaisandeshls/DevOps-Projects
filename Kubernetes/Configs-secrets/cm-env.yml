@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-cm2
+spec:
+  containers:
+    - name: container-with-cm2
+      image: your_image
+      envFrom:
+        - configMapRef:
+            name: cm2
+
