@@ -17,6 +17,6 @@ spec:
         image: nginx
         resources:
           limits:
-            cpu: "200m"
+            cpu: "50m"
           requests:
-            cpu: "100m"
+            cpu: "50m"
