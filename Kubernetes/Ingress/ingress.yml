@@ -4,7 +4,7 @@ metadata:
   name: demo-ingress
 spec:
   rules:
-  - host: api.example.com  # Replace with your desired hostname
+  - host: api.example.com  
     http:
       paths:
       - path: /page1
