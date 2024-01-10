@@ -1,6 +1,10 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-ingress
 spec:
   rules:
-  - host: api.example.com
+  - host: api.example.com  # Replace with your desired hostname
     http:
       paths:
       - path: /page1
@@ -17,5 +21,3 @@ spec:
             name: demo-service-2
             port:
               number: 80
-
-
